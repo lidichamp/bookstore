@@ -5,7 +5,7 @@
 <div class="container">
   <div class="span12">
     <div class="row">
-      <ul class="thumbnails">\
+      <ul class="thumbnails">
       
         @foreach($books as $book)
 

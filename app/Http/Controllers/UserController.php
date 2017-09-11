@@ -7,12 +7,13 @@ class UserController extends Controller
 {
     public function postLogin(Request $request)
   {
+   // dd($request->all());
     $email=$request->email;
     $password=$request->password;
 
     if (Auth::attempt(array('email' => $email, 'password' => $password)))
     {
-        
+      
     return redirect('index');
 
     }else{

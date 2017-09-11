@@ -30,7 +30,7 @@
                     <a class="dropdown-toggle" href="#" data-toggle="dropdown">Sign In <strong class="caret"></strong></a>
                     <div class="dropdown-menu" style="padding: 15px; padding-bottom: 0px;">
                       <p>Please Login</a>
-                        <form action="/user/auth/login" method="post" accept-charset="UTF-8">
+                        <form action="{{ action('Auth\LoginController@getLogin') }}" method="post" accept-charset="UTF-8">
                         {{  csrf_field() }}
                           <input id="email" style="margin-bottom: 15px;" type="text" name="email" size="30" placeholder="email" />
                           <input id="password" style="margin-bottom: 15px;" type="password" name="password" size="30" />

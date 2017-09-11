@@ -25,3 +25,9 @@ Route::post('/cart/add', array('before'=>'auth.basic','uses'=>'CartController@po
 Route::get('/cart/delete/{id}', array('before'=>'auth.basic','as'=>'delete_book_from_cart','uses'=>'CartController@getDelete'));
 Route::post('/order', array('before'=>'auth.basic','uses'=>'OrderController@postOrder'));
 Route::get('/user/orders', array('before'=>'auth.basic','uses'=>'OrderController@getIndex'));
+
+Route::get('dummy_form', 'TestController@showForm');
+Route::post('dummy_form_post', 'TestController@postForm');
+
+Route::match(['get', 'post'], 'dummy_form_combine', ['uses' => 'TestController@combined', 'as'=> 'dummy_form_route'])
+;
