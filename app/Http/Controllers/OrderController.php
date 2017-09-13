@@ -31,7 +31,7 @@ class OrderController extends Controller
          return Redirect::route('index')->with('error','Your cart is empty.');
        }
 
-      $order = Order::create(
+    $order = Order::create(
         array(
         'member_id'=>$member_id,
         'address'=>$address,
@@ -49,7 +49,7 @@ class OrderController extends Controller
       }
       
       Cart::where('member_id','=',$member_id)->delete();
-
+      Mail::to($address)->send(new AnRediaBookStore($order));
       return Redirect::route('index')->with('message','Your order processed successfully.');
   }
 

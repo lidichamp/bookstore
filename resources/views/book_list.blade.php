@@ -6,7 +6,23 @@
   <div class="span12">
     <div class="row">
       <ul class="thumbnails">
-      
+
+      @if (Session::has('error'))
+        <div class="alert alert-danger alert-auth small">
+          <button class="close" data-dismiss-"alert" type="button">X
+          </button>
+            {{session('error')}}
+        </div>
+      @endif
+@if ($errors->any())
+        <div class="alert alert-danger">
+          <ul>
+            @foreach ($errors->all() as $error)
+              <li>{{$error}}</li>
+            @endforeach
+          </ul>
+        </div>
+@endif
         @foreach($books as $book)
 
         <li class="span4">
@@ -16,7 +32,7 @@
               <h3>{{$book->title}}</h3>
               <p>Author : <b>{{$book->author->name}} {{$book->author->surname}}</b></p>
               <p>Price : <b>{{$book->price}}</b></p>
-              <form action="/cart/add" name="add_to_cart" method="post" accept-charset="UTF-8">
+              <form action="{{ action('CartController@postAddToCart') }}" name="add_to_cart" method="post" accept-charset="UTF-8">
                 <input type="hidden" name="book" value="{{$book->id}}" />
                 {!!  csrf_field() !!}
                 <select name="amount" style="width: 100%;">

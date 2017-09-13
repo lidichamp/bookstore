@@ -15,7 +15,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </a>
-            <a class="brand" href="/">AnRedia Book Store</a>
+            <a class="brand" href="{{ route("homepage") }}">AnRedia Book Store</a>
             <div class="nav-collapse collapse">
               <ul class="nav">
                   <li class="divider-vertical"></li>
@@ -40,7 +40,7 @@
                     </li>
                   </ul>
                 @else
-                <li><a href="/cart"><i class="icon-shopping-cart icon-white"></i> Your Cart</a></li>
+                <li><a href="{{ action('CartController@getIndex')}}"><i class="icon-shopping-cart icon-white"></i> Your Cart</a></li>
                   <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Welcome, {{Auth::user()->name}} <b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li><a href="/user/orders"><i class="icon-envelope"></i> My Orders</a></li>

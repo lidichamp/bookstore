@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Cart;
+use App\Book;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Auth;
@@ -10,7 +11,7 @@ class CartController extends Controller
 {
    public function postAddToCart(Request $request)
  {
-   dd($request->all());
+
    /** $rules=array(
 
       'amount'=>'required|numeric',
@@ -23,12 +24,14 @@ class CartController extends Controller
       {
           return redirect()->back()->with('error','The book could not added to your cart!');
       }
-dump('iya');*/
+*/
 
 $this->validate($request, [
        'amount'=>'required|numeric',
       'book'=>'required|numeric|exists:books,id'
     ]);
+
+    
       $member_id = Auth::user()->id;
       $book_id = $request->book;
       $amount = $request->amount;
@@ -36,23 +39,30 @@ $this->validate($request, [
       $book = Book::find($book_id);
       $total = $amount*$book->price;
 
-       $count = Cart::where('book_id','=',$book_id)->where('member_id','=',$member_id)->count();
+      
 
+      $count = Cart::where('book_id','=',$book_id)->where('member_id','=',$member_id)->first();
        if($count){
+       
 
 
-          return redirect()->back()->with('error','The book already in your cart.');
+        
+        $amounts=$count->amount + $amount;
+        $cart=Cart::find($count->id);
+        $cart->amount=$amounts;
+        $cart->update();
+          //return redirect()->back()->with('error','The book already in your cart.');
        }
 
-      Cart::create(
+      /*Cart::create(
         array(
         'member_id'=>$member_id,
         'book_id'=>$book_id,
         'amount'=>$amount,
         'total'=>$total
-        ));
+        ));*/
 
-      return redirect('cart');
+      return redirect('home');
   }
 
 
