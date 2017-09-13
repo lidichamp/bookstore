@@ -25,18 +25,14 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/';
+    protected $redirectTo = '/index';
 
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-     public function getLogin()
-     {
-     
-         return view('book_list');
-     }
+    
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
