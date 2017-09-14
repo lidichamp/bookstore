@@ -31,10 +31,12 @@ class AnRediaBookStore extends Mailable
      */
     public function build()
     {
-        return $this->view('mail.AnRediaBookStore')->with([
+        return $this->from('orders@anredia.com')
+        ->view('mail.orderplaced')->with([
             'amount'=>$order_books->amount,
             'price'=>$order_books->Books->price,
             'total'=>$order_books->Books->price*$order_books->amount
+        ]);
             
     }
 }

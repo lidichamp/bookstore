@@ -27,11 +27,12 @@
 
         <li class="span4">
           <div class="thumbnail">
-            <img src="/images/{{$book->cover}}" alt="ALT NAME">
+            <img src="images/{{$book->cover}}" alt="ALT NAME">
             <div class="caption">
               <h3>{{$book->title}}</h3>
               <p>Author : <b>{{$book->author->name}} {{$book->author->surname}}</b></p>
               <p>Price : <b>{{$book->price}}</b></p>
+             
               <form action="{{ action('CartController@postAddToCart') }}" name="add_to_cart" method="post" accept-charset="UTF-8">
                 <input type="hidden" name="book" value="{{$book->id}}" />
                 {!!  csrf_field() !!}

@@ -1,0 +1,12 @@
+
+get author bookas and sort in descending order
+
+                $flights = App\Flight::where('active', 1)
+               ->orderBy('name', 'desc')
+               ->get()
+
+get author bookas and sort in ascending order
+               $flights = App\Flight::where('active', 1)
+               ->orderBy('name', 'asc')
+               ->get()
+

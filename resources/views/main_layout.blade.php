@@ -19,7 +19,9 @@
             <div class="nav-collapse collapse">
               <ul class="nav">
                   <li class="divider-vertical"></li>
-                  <li><a href="/"><i class="icon-home icon-white"></i> Book List</a></li>
+                  <li><a href="{{ route("homepage") }}"><i class="icon-book icon-white"></i> Book List</a></li>
+                  <li class="divider-vertical"></li>
+                  <li><a href="{{ route("author") }}"><i class="icon-user icon-white"></i> Author List</a></li>
               </ul>
               <div class="pull-right">
                 <ul class="nav pull-right">
@@ -40,14 +42,37 @@
                     </li>
                   </ul>
                 @else
-                <li><a href="{{ action('CartController@getIndex')}}"><i class="icon-shopping-cart icon-white"></i> Your Cart</a></li>
-                  <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Welcome, {{Auth::user()->name}} <b class="caret"></b></a>
+                <li><a href="{{ action('CartController@getIndex')}}"> <b><i class="icon-shopping-cart icon-white"></i></b> Your Cart</a></li>
+                 <!-- <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Welcome, {{Auth::user()->name}} <b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li><a href="/user/orders"><i class="icon-envelope"></i> My Orders</a></li>
                             <li class="divider"></li>
                             <li><a href="/user/logout"><i class="icon-off"></i> Logout</a></li>
                         </ul>
-                    </li>
+                    </li>-->@endif
+                    @if (Auth::guest())
+                           
+                            <li><a href="{{ route('register') }}">Register</a></li>
+                        @else
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                    {{ Auth::user()->name }} <span class="caret"></span>
+                                </a>
+
+                                <ul class="dropdown-menu" role="menu">
+                                    <li>
+                                        <a href="{{ route('logout') }}"
+                                            onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                            Logout
+                                        </a>
+
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                            {{ csrf_field() }}
+                                        </form>
+                                    </li>
+                                </ul>
+                            </li>
                 @endif
                 </ul>
               </div>
@@ -77,6 +102,10 @@
         </ul>
     </div>
 @endif
+
+@if(Session::has('success'))
+    alert("{{Session::get('success')}}");
+  @endif
 /**
   @if(isset($error))
     alert("{{$error}}");

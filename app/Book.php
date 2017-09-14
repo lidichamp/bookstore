@@ -10,8 +10,8 @@ class Book extends Model
 
 protected $fillable = array('title','isbn','cover','price','author_id');
 
-public function author(){
-
-return $this->belongsTo('App\Author','author_id','id');
-}
+    public function author()
+    {
+     return $this->belongsTo('App\Author');
+    }
 }

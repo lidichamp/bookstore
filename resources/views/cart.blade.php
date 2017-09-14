@@ -57,7 +57,8 @@
     </tbody>
   </table>
   <h1>Shipping</h1>
-  <form action="{{ action('OrderController@postOrder')}} method="post" accept-charset="UTF-8">
+  <form action="{{ action('OrderController@postOrder')}}" method="post" accept-charset="UTF-8">
+  {{ csrf_field() }}
     <label>Address</label>
     <textarea class="span4" name="address" rows="5"></textarea>
     <button class="btn btn-block btn-primary btn-large">Place order</button>

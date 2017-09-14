@@ -20,8 +20,8 @@ Route::get('auth/logout', 'UserController@getLogout');
 Route::get('/', ['uses' => 'BookController@getIndex','as' => 'homepage']);
 // Route::get('/home', [ 'uses' => 'BookController@getIndex']);
 Route::get('/index', ['uses' => 'BookController@getIndex']);
-
-
+//Route::get('/author', 'AuthorController@index')->name('author');
+Route::get('/author', ['uses' => 'AuthorController@getIndex','as' => 'author']);
 Route::group(['middleware' => 'auth'], function(){
 Route::get('/cart', array('before'=>'auth.basic','as'=>'cart','uses'=>'CartController@getIndex'));
 Route::get('/cart/add', array('before'=>'auth.basic','uses'=>'CartController@postAddToCart'));

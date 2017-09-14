@@ -1,22 +1,23 @@
 <?php
 namespace App\Http\Controllers;
-
+use Validator;
 use Illuminate\Http\Request;
 use App\Order;
 class OrderController extends Controller
 {
-    public function postOrder()
+    public function postOrder(Request $request)
   {
     $rules=array(
 
       'address'=>'required'
     );
 
-  $validator = Validator::make(Input::all(), $rules);
+  $validator = Validator::make($request->all(), $rules);
 
       if ($validator->fails())
       {
-          return Redirect::route('cart')->with('error','Address field is required!');
+        return redirect()->back()->with('error','Address field is required!');
+          
       }
 
       $member_id = Auth::user()->id;
@@ -50,7 +51,7 @@ class OrderController extends Controller
       
       Cart::where('member_id','=',$member_id)->delete();
       Mail::to($address)->send(new AnRediaBookStore($order));
-      return Redirect::route('index')->with('message','Your order processed successfully.');
+      return Redirect::route('index')->with('success','Your order processed successfully.');
   }
 
 

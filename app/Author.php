@@ -9,4 +9,8 @@ class Author extends Model
     protected $table = 'authors';
 
 protected $fillable = array('name','surname');
+    public function books()
+    {
+         return $this->hasMany('App\Book');
+    }   
 }

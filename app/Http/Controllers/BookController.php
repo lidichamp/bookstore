@@ -1,16 +1,22 @@
 <?php
 namespace App\Http\Controllers;
 use App\Book;
+use App\Author;
 use Illuminate\Http\Request;
 
 class BookController extends Controller
 {
     public function getIndex()
   {
-    $books = Book::with('author')->get();
 
-    return view('book_list')->with('books',$books);
+    
+    $book = Book::with('author')->get();
+    // $author = Author::with('books')->get();
+
+    //dd($book->toArray());
+    // foreach($author->)
+    return view('book_list')->with('books',$book);
 
   }
-
+ 
 }

@@ -37,7 +37,7 @@ $this->validate($request, [
       $amount = $request->amount;
 
       $book = Book::find($book_id);
-      $total = $amount*$book->price;
+     // $total = $amount*$book->price;
 
       
 
@@ -49,10 +49,20 @@ $this->validate($request, [
         
         $amounts=$count->amount + $amount;
         $cart=Cart::find($count->id);
-        $cart->amount=$amounts;
+        $cart->amount = $amounts;
+        $cart->total  =$book->price*$amounts;
         $cart->update();
-          //return redirect()->back()->with('error','The book already in your cart.');
+        //return redirect()->back()->with('error','The book already in your cart.');
        }
+        else{
+          Cart::create(
+            array(
+            'member_id'=>$member_id,
+            'book_id'=>$book_id,
+            'amount'=>$amount,
+            'total'=>$book->price*$amount
+            ));
+        }
 
       /*Cart::create(
         array(
@@ -62,18 +72,19 @@ $this->validate($request, [
         'total'=>$total
         ));*/
 
-      return redirect('home');
+        return redirect()->back()->with('success','Your book has been added to cart!');
   }
 
 
   public function getIndex(){
+    
 
     $member_id = Auth::user()->id;
 
     $cart_books=Cart::with('Books')->where('member_id','=',$member_id)->get();
 
     $cart_total=Cart::with('Books')->where('member_id','=',$member_id)->sum('total');
-
+    //View::share('amount', $cart_item->amount);
     if(!$cart_books){
 
       return redirect('index')->with('error','Your cart is empty');
@@ -89,6 +100,12 @@ $this->validate($request, [
     $cart = Cart::find($id)->delete();
 
     return redirect('cart');
+  }
+
+  public function getCartContents()
+  {
+    return $cart_item->amount;
+    
   }
 
 }
