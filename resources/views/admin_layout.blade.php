@@ -15,14 +15,14 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </a>
-            <a class="brand" href="{{ route("homepage") }}">AnRedia Book Store</a>
+            <a class="brand" href="{{ route("homepage") }}">AnRedia Dashboard</a>
             <div class="nav-collapse collapse">
-              <ul class="nav">
+            <!--  <ul class="nav">
                   <li class="divider-vertical"></li>
                   <li><a href="{{ route("homepage") }}"><i class="icon-book icon-white"></i> Book List</a></li>
                   <li class="divider-vertical"></li>
                   <li><a href="{{ route("author") }}"><i class="icon-user icon-white"></i> Author List</a></li>
-              </ul>
+              </ul>-->
               <div class="pull-right">
                 <ul class="nav pull-right">
                 @if(!Auth::check())
@@ -42,7 +42,7 @@
                     </li>
                   </ul>
                 @else
-                <li><b> {{ getCartContents() }} </b><a href="{{ action('CartController@getIndex')}}"> <b><i class="icon-shopping-cart icon-white"></i></b> Your Cart</a></li>
+                <a><li> <b> </b>Howdy, Admin </li></a>
                  <!-- <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Welcome, {{Auth::user()->name}} <b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li><a href="/user/orders"><i class="icon-envelope"></i> My Orders</a></li>
@@ -93,10 +93,20 @@
       e.stopPropagation();
     });
   });
-  @if(Session::has('success'))
+  @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
+@if(Session::has('success'))
     alert("{{Session::get('success')}}");
   @endif
-
+/**
   @if(isset($error))
     alert("{{$error}}");
   @endif
@@ -107,20 +117,8 @@
 
   @if(Session::has('message'))
     alert("{{Session::get('message')}}");
-  @endif
+  @endif*/
+
   </script>
-  @if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    
-@endif
-
-
-  </div>
-  
 </body>
 </html>

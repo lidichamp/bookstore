@@ -15,14 +15,18 @@ Route::post('auth/register', 'Auth\RegisterController@postRegister');
 Route::get('user/auth/login', ['as'=>'login','uses'=>'Auth\LoginController@getLogin']);
 Route::post('user/auth/login', 'UserController@postLogin');
 Route::get('auth/logout', 'UserController@getLogout');
-
-
+Route::post ('admin','UserController@seeAdminLogin') ;
+Route::get ('admin','UserController@seeAdminLogin') ;
+Route::get ('administrator',['as'=>'administrator','uses'=>'UserController@postAdminLogin']) ;
+Route::post ('administrator',['as'=>'administrator','uses'=>'UserController@postAdminLogin'])  ;
 Route::get('/', ['uses' => 'BookController@getIndex','as' => 'homepage']);
 // Route::get('/home', [ 'uses' => 'BookController@getIndex']);
 Route::get('/index', ['uses' => 'BookController@getIndex']);
 //Route::get('/author', 'AuthorController@index')->name('author');
+
 Route::get('/author', ['uses' => 'AuthorController@getIndex','as' => 'author']);
 Route::group(['middleware' => 'auth'], function(){
+    Route::get('/addproduct', array('before'=>'auth.basic','as'=>'addproduct','uses'=>'BookController@AddBookView'));
 Route::get('/cart', array('before'=>'auth.basic','as'=>'cart','uses'=>'CartController@getIndex'));
 Route::get('/cart/add', array('before'=>'auth.basic','uses'=>'CartController@postAddToCart'));
 Route::post('/cart/add', array('before'=>'auth.basic','uses'=>'CartController@postAddToCart'));

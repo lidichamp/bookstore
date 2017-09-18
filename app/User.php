@@ -39,7 +39,10 @@ class User extends Authenticatable
   {
     return $this->password;
   }
-
+  public function isAdmin()
+  {
+      return $this->admin ? true : false; // this looks for an admin column in your users table
+  }
   /**
    * Get the e-mail address where password reminders are sent.
    *

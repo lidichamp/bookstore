@@ -14,4 +14,13 @@ protected $fillable = array('title','isbn','cover','price','author_id');
     {
      return $this->belongsTo('App\Author');
     }
+    
+    public function addbook()
+    {
+       // $addbook = new Books;
+        
+        //$addbook->username = Input::get('username');
+        
+        //$user->save();
+    }
 }

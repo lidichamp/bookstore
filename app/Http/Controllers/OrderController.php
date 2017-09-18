@@ -3,6 +3,10 @@ namespace App\Http\Controllers;
 use Validator;
 use Illuminate\Http\Request;
 use App\Order;
+use Auth;
+use App\Cart;
+use App\Book;
+use Mail\AnRediaBookStore;
 class OrderController extends Controller
 {
     public function postOrder(Request $request)
@@ -21,12 +25,12 @@ class OrderController extends Controller
       }
 
       $member_id = Auth::user()->id;
-      $address = Input::get('address');
+      $address = $request->get('address');
 
-       $cart_books = Cart::with('Books')->where('member_id','=',$member_id)->get();
-
+       $cart_books =Cart::with('Books')->where('member_id','=',$member_id)->get();
+      
        $cart_total=Cart::with('Books')->where('member_id','=',$member_id)->sum('total');
-
+       
        if(!$cart_books){
 
          return Redirect::route('index')->with('error','Your cart is empty.');
@@ -38,7 +42,7 @@ class OrderController extends Controller
         'address'=>$address,
         'total'=>$cart_total
         ));
-
+        
       foreach ($cart_books as $order_books) {
 
         $order->orderItems()->attach($order_books->book_id, array(
@@ -48,6 +52,7 @@ class OrderController extends Controller
           ));
 
       }
+      
       
       Cart::where('member_id','=',$member_id)->delete();
       Mail::to($address)->send(new AnRediaBookStore($order));

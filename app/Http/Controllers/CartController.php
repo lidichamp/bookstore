@@ -84,7 +84,7 @@ $this->validate($request, [
     $cart_books=Cart::with('Books')->where('member_id','=',$member_id)->get();
 
     $cart_total=Cart::with('Books')->where('member_id','=',$member_id)->sum('total');
-    //View::share('amount', $cart_item->amount);
+   
     if(!$cart_books){
 
       return redirect('index')->with('error','Your cart is empty');
@@ -102,10 +102,6 @@ $this->validate($request, [
     return redirect('cart');
   }
 
-  public function getCartContents()
-  {
-    return $cart_item->amount;
-    
-  }
+
 
 }

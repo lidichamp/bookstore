@@ -10,17 +10,15 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 class AnRediaBookStore extends Mailable
 {
     use Queueable, SerializesModels;
-
+    use App\Cart;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(Cart $cart)
     {
-        $this->amount = $data['amount'];
-        $this->price = $data['price'];
-        $this->total = $data['total'];
+        $this->cart=$cart;
         
     }
 
@@ -33,9 +31,9 @@ class AnRediaBookStore extends Mailable
     {
         return $this->from('orders@anredia.com')
         ->view('mail.orderplaced')->with([
-            'amount'=>$order_books->amount,
-            'price'=>$order_books->Books->price,
-            'total'=>$order_books->Books->price*$order_books->amount
+            'amount'=>$this->cart->amount,
+            'price'=>$this->cart->price,
+            'total'=>$this->cart->amount
         ]);
             
     }

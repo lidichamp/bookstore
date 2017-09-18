@@ -23,6 +23,29 @@ class UserController extends Controller
         ->with('error','Please check your password & email');
     }
   }
+  public function seeAdminLogin(Request $request)
+  {return view('auth/adminlogin');
+
+  }
+  public function postAdminLogin(Request $request)
+  {
+   // dd($request->all());
+    $email=$request->email;
+    $password=$request->password;
+    $admin=1;
+    if (Auth::attempt(array('email' => $email, 'password' => $password,'admin'=>$admin)))
+    {
+      
+      return view('welcome');
+    }
+    
+      else{
+
+    
+    return redirect('index')
+        ->with('error','You an not an administrator of this site please continue shopping');
+   
+  }}
 
   public function getLogout()
   {
