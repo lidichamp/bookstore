@@ -26,7 +26,20 @@ Route::get('/index', ['uses' => 'BookController@getIndex']);
 
 Route::get('/author', ['uses' => 'AuthorController@getIndex','as' => 'author']);
 Route::group(['middleware' => 'auth'], function(){
-    Route::get('/addproduct', array('before'=>'auth.basic','as'=>'addproduct','uses'=>'BookController@AddBookView'));
+Route::get('/addproduct', array('before'=>'auth.basic','as'=>'addproduct','uses'=>'adminBookController@AddBookView'));
+Route::get('/admin/book', array('before'=>'auth.basic','as'=>'addbook','uses'=>'adminBookController@getIndex'));
+Route::get('/admin/editbook', array('before'=>'auth.basic','as'=>'editbook','uses'=>'adminBookController@editBook'));
+Route::get('/admin/dashboard', array('before'=>'auth.basic','as'=>'dashboard','uses'=>'adminBookController@Dashboard'));
+Route::get('/admin/editauthor', array('before'=>'auth.basic','as'=>'editauthor','uses'=>'adminAuthorController@editAuthor'));
+Route::get('/admin/editauthors', array('before'=>'auth.basic','as'=>'editauthors','uses'=>'adminAuthorController@editAuthors'));
+Route::post('/admin/editauthors', array('before'=>'auth.basic','as'=>'editauthors','uses'=>'adminAuthorController@editAuthors'));
+Route::get('/admin/author', array('before'=>'auth.basic','as'=>'addauthor','uses'=>'adminAuthorController@getIndex'));
+Route::post('/admin/author/add', array('before'=>'auth.basic','as'=>'add-new-authors','uses'=>'adminAuthorController@storeAuthor'));
+Route::get('/admin/author/add', array('before'=>'auth.basic','as'=>'add-new-authors','uses'=>'adminAuthorController@storeAuthor'));
+Route::post('/admin/book/add', array('before'=>'auth.basic','as'=>'add-new-books','uses'=>'adminBookController@storeBook'));
+Route::get('/admin/book/add', array('before'=>'auth.basic','as'=>'add-new-books','uses'=>'adminBookrController@storeBook'));
+Route::post('/admin/author/edited', array('before'=>'auth.basic','as'=>'add-new-authord','uses'=>'adminAuthorController@saveEditAuthors'));
+Route::get('/admin/author/edited', array('before'=>'auth.basic','as'=>'add-new-authord','uses'=>'adminAuthorController@saveEditAuthors'));
 Route::get('/cart', array('before'=>'auth.basic','as'=>'cart','uses'=>'CartController@getIndex'));
 Route::get('/cart/add', array('before'=>'auth.basic','uses'=>'CartController@postAddToCart'));
 Route::post('/cart/add', array('before'=>'auth.basic','uses'=>'CartController@postAddToCart'));

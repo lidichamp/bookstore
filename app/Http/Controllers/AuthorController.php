@@ -16,11 +16,6 @@ class AuthorController extends Controller
         
         return view('author_list', compact('authors','books') );
     }
-    public function getDelete($id){
-        
-            $authors = Author::find($id)->delete();
-        
-            return redirect('author');
-          }
+   
     
 }

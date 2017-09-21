@@ -56,7 +56,7 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'horder@anrediabookstores.com'),
+        'address' => env('MAIL_FROM_ADDRESS', 'order@anrediabookstores.com'),
         'name' => env('MAIL_FROM_NAME', 'AnRedia Book Store'),
     ],
 

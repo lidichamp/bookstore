@@ -12,6 +12,6 @@ protected $fillable = array('member_id','address','total');
 
 public function orderItems()
     {
-        return $this->belongsToMany('App\Book','order_books') ->withPivot('amount','total');
+        return $this->belongsToMany('App\Book','order_books') ->withPivot('amount','price','total');
     }
 }

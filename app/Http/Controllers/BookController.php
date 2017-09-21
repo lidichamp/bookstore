@@ -20,18 +20,5 @@ class BookController extends Controller
     return view('book_list')->with('books',$book);
 
   }
-  public function AddBookView()
-  {
-
-
-    return view('product');
-
-  }
-  
-  public function getDelete($id){
-    
-        $book = Book::find($id)->delete();
-    
-        return redirect('index');
-      }
+ 
 }
