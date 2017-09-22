@@ -52,7 +52,7 @@ class adminAuthorController extends Controller
   
     }
 
-    public function SaveEditAuthors()
+    public function SaveEditAuthors(Request $request)
     {
         
         $authoradd= Author::find($id);

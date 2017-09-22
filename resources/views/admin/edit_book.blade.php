@@ -35,7 +35,7 @@
                            
                                <img src="../images/{{$book->cover}}" alt="ALT NAME">
                                
-                                 <h3>{{$book->title}}</h3>
+                                 <h3>EDIT {{$book->title}}</h3>
  
                                  <p>Author : <b>{{$book->author->name}} {{$book->author->surname}}</b></p>
                                  <p>Price : <b>{{$book->price}}</b></p>
@@ -48,11 +48,9 @@
     <button id="singlebutton" name="singlebutton" class="btn btn-primary">EDIT BOOK</button><br>  <br>      
   
                                </form>  
-                               <form class="form-horizontal" action="{{ route('bdelete') }}" method="POST">
-<div class="col-md-4"> {{ csrf_field() }}
-    <button id="singlebutton" name="singlebutton" class="btn btn-primary">DELETE</button>
-  </div>
-</form><br><hr><br>       
+                               <a href="{{URL::route('bdelete',array($book->id))}}">
+                               <button id="singlebutton" name="singlebutton" class="btn btn-primary">DELETE</button>
+                               </a><br><hr><br>       
                                </div>
                        
                            @endforeach

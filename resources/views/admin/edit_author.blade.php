@@ -32,19 +32,21 @@
 @endif
 @foreach($authors as $author)
 
-        
+
           
             
             <div class="caption">
-            <form class="form-horizontal" action="{{ route('editauthors') }}" method="POST">
+            <form class="form-horizontal" action="{{ route('editauthors'), array($author->id)}}" method="POST">
+            
             <h3><b>{{$author->name}} {{$author->surname}}</b>    <br><br><button id="singlebutton" name="singlebutton" class="btn btn-primary">EDIT AUTHOR</button></h3>
             {{ csrf_field() }}
+            <a href="{{URL::route('adelete',array($author->id))}}">
+            <button id="singlebutton" name="singlebutton" class="btn btn-primary">DELETE</button>
+            </a>
 </form>
-<form class="form-horizontal" action="{{ route('adelete') }}" method="POST">
-<div class="col-md-4"> {{ csrf_field() }}
-    <button id="singlebutton" name="singlebutton" class="btn btn-primary">DELETE</button>
-  </div>
-</form>
+
+
+
             
           </div>
           <br><br><hr>

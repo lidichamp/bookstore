@@ -6,9 +6,9 @@
             <div id="page-inner">
                 <div class="row">
                     <div class="col-md-12">
-                     <h2>EDIT </h2> 
+                     <h2>EDIT {{$author->name}} {{$author->surname}} ID:{{$author->id}}</h2> 
                       
-                     <form class="form-horizontal" action="{{ route('add-new-authors') }}" method="POST">
+                     <form class="form-horizontal" action="{{ route('editauthors') }}" method="PATCH">
 <fieldset>
 
 <!-- Form Name -->
@@ -22,7 +22,7 @@
 <div class="form-group">
   <label class="col-md-4 control-label" for="first_name">FIRST NAME</label>  
   <div class="col-md-4">
-  <input id="first_name" name="first_name" placeholder="FIRST NAME" class="form-control input-md" required="" type="text">
+  <input id="first_name" name="first_name" placeholder="{{$author->surname}}" class="form-control input-md" required="" type="text">
   {{ csrf_field() }}
   </div>
 </div>
@@ -31,10 +31,11 @@
 <div class="form-group">
   <label class="col-md-4 control-label" for="surname">SURNAME</label>  
   <div class="col-md-4">
-  <input id="sur_name" name="sur_name" placeholder="SURNAME" class="form-control input-md" required="" type="text">
+  <input id="sur_name" name="sur_name" placeholder="{{$author->surname}}" class="form-control input-md" required="" type="text">
     
   </div>
 </div>
+
 
 <!-- File Button --> 
 

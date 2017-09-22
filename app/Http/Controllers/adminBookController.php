@@ -23,12 +23,16 @@ class adminBookController extends Controller
     }
     public function editBook()
     {
-  
+     
+      
+       
+      
       $book = Book::with('author')->get();
+     // $book = Book::findOrFail($id);
      
       return view('admin.edit_book')->with('books',$book);
   
-    }
+   }
     public function Dashboard()
     {
   
