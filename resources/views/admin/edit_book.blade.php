@@ -45,11 +45,16 @@
                                    {!!  csrf_field() !!}
                           
                                   
-    <button id="singlebutton" name="singlebutton" class="btn btn-primary">EDIT BOOK</button><hr><br>
+    <button id="singlebutton" name="singlebutton" class="btn btn-primary">EDIT BOOK</button><br>  <br>      
   
-                               </form>         
+                               </form>  
+                               <form class="form-horizontal" action="{{ route('bdelete') }}" method="POST">
+<div class="col-md-4"> {{ csrf_field() }}
+    <button id="singlebutton" name="singlebutton" class="btn btn-primary">DELETE</button>
+  </div>
+</form><br><hr><br>       
                                </div>
-                            
+                       
                            @endforeach
                          </ul>
                        </div>

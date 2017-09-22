@@ -37,13 +37,17 @@
             
             <div class="caption">
             <form class="form-horizontal" action="{{ route('editauthors') }}" method="POST">
-            <h3><b>{{$author->name}} {{$author->surname}}</b>    &nbsp;&nbsp;&nbsp;<button id="singlebutton" name="singlebutton" class="btn btn-primary">EDIT AUTHOR</button></h3>
+            <h3><b>{{$author->name}} {{$author->surname}}</b>    <br><br><button id="singlebutton" name="singlebutton" class="btn btn-primary">EDIT AUTHOR</button></h3>
             {{ csrf_field() }}
 </form>
-            
+<form class="form-horizontal" action="{{ route('adelete') }}" method="POST">
+<div class="col-md-4"> {{ csrf_field() }}
+    <button id="singlebutton" name="singlebutton" class="btn btn-primary">DELETE</button>
+  </div>
+</form>
             
           </div>
-          <hr><br>
+          <br><br><hr>
   
         @endforeach
       </ul>

@@ -36,7 +36,7 @@ class UserController extends Controller
     if (Auth::attempt(array('email' => $email, 'password' => $password,'admin'=>$admin)))
     {
       
-      return view('admin.dashboard');
+      return redirect('admin/dashboard');
     }
     
       else{
